@@ -3,7 +3,6 @@ package com.example.recyclerview
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.recyclerview.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -12,10 +11,23 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        val recyclerView = binding.recyclerView
-        recyclerView.layoutManager = LinearLayoutManager(this)
 
-        recyclerView.adapter = CustomRecyclerAdapter(this, getCatList())
+
+
+
+        val adapter = CustomRecyclerAdapter(this) // Инициализируем адаптер
+        val recyclerView = binding.recyclerView // Инициализируем Recycler View
+        recyclerView.layoutManager = LinearLayoutManager(this) // Делаем вид(строчный)
+        recyclerView.adapter = adapter // Подключаем адаптер
+        for(i in 0..20){
+            val img = R.drawable.img
+            val name = this.resources.getStringArray(R.array.cat_names)[i]
+            val cat = Cats(img, name)
+            adapter.add(cat)
+        }
+
+
+
 
 
 
@@ -24,9 +36,6 @@ class MainActivity : AppCompatActivity() {
 
     } // Заканчивается onCreate
 
-    private fun getCatList(): List<String> {
-        return this.resources.getStringArray(R.array.cat_names).toList()
-    }
 
 
 } // Заканчивается MainActivity
