@@ -1,16 +1,14 @@
 package com.example.recyclerview
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.recyclerview.databinding.RecyclerviewItemBinding
+import com.squareup.picasso.Picasso
 
 
-class CustomRecyclerAdapter(private var context: Context): RecyclerView.Adapter<CustomRecyclerAdapter.MyViewHolder>() {
-
-        val catList = arrayListOf<Cats>()
+class CustomRecyclerAdapter(private var context: Context, val userItem: user): RecyclerView.Adapter<CustomRecyclerAdapter.MyViewHolder>() {
 
         class MyViewHolder(binding: RecyclerviewItemBinding) : RecyclerView.ViewHolder(binding.root) {
             val largeTextView = binding.textViewLarge
@@ -28,17 +26,16 @@ class CustomRecyclerAdapter(private var context: Context): RecyclerView.Adapter<
     }
 
     override fun getItemCount(): Int {
-        return catList.size
+        return userItem.data.size
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.largeTextView.text = catList[position].name
-        holder.smallTextView.text = "кот"
-        holder.image.setImageResource(catList[position].img)
+        holder.largeTextView.text = userItem.data[position].first_name
+        holder.smallTextView.text = userItem.data[position].email
+        Picasso.get()
+            .load(userItem.data[position].avatar)
+            .into(holder.image)
     }
 
-fun add(cat: Cats){
-    catList.add(cat)
-}
 
 }

@@ -39,6 +39,9 @@ android {
 }
 
 dependencies {
+    implementation ("com.squareup.picasso:picasso:2.8") // Picasso
+    implementation ("com.squareup.retrofit2:retrofit:2.9.0") // Retrofit
+    implementation ("com.squareup.retrofit2:converter-gson:2.9.0") // Json
     implementation ("androidx.recyclerview:recyclerview:1.2.1") // RecyclerView
 
     implementation("androidx.core:core-ktx:1.9.0")
