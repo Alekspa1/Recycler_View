@@ -8,7 +8,7 @@ import com.example.recyclerview.databinding.RecyclerviewItemBinding
 import com.squareup.picasso.Picasso
 
 
-class CustomRecyclerAdapter(private var context: Context, val userItem: User): RecyclerView.Adapter<CustomRecyclerAdapter.MyViewHolder>() {
+class CustomRecyclerAdapter(private var context: Context, val userItem: Nasa): RecyclerView.Adapter<CustomRecyclerAdapter.MyViewHolder>() {
 
         class MyViewHolder(binding: RecyclerviewItemBinding) : RecyclerView.ViewHolder(binding.root) {
             val largeTextView = binding.textViewLarge
@@ -26,14 +26,14 @@ class CustomRecyclerAdapter(private var context: Context, val userItem: User): R
     }
 
     override fun getItemCount(): Int {
-        return userItem.data.size
+        return 10
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.largeTextView.text = userItem.data[position].first_name
-        holder.smallTextView.text = userItem.data[position].email
+        holder.largeTextView.text = userItem.title
+        holder.smallTextView.text = "Пес"
         Picasso.get()
-            .load(userItem.data[position].avatar)
+            .load(userItem.url)
             .into(holder.image)
     }
 
