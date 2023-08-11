@@ -8,7 +8,7 @@ import com.example.recyclerview.databinding.RecyclerviewItemBinding
 import com.squareup.picasso.Picasso
 
 
-class CustomRecyclerAdapter(private var context: Context, val userItem: user): RecyclerView.Adapter<CustomRecyclerAdapter.MyViewHolder>() {
+class CustomRecyclerAdapter(private var context: Context, val userItem: User): RecyclerView.Adapter<CustomRecyclerAdapter.MyViewHolder>() {
 
         class MyViewHolder(binding: RecyclerviewItemBinding) : RecyclerView.ViewHolder(binding.root) {
             val largeTextView = binding.textViewLarge

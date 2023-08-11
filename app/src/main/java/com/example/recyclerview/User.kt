@@ -1,6 +1,6 @@
 package com.example.recyclerview
 
-data class user(
+data class User(
     val `data`: List<Data>,
     val page: Int,
     val per_page: Int,

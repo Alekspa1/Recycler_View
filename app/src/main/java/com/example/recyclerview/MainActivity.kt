@@ -2,9 +2,7 @@ package com.example.recyclerview
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.recyclerview.databinding.ActivityMainBinding
 import retrofit2.Call
 import retrofit2.Callback
@@ -18,29 +16,21 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         val recyclerView = binding.recyclerView // Инициализируем Recycler View
         recyclerView.layoutManager = GridLayoutManager(this, 2) // Делаем вид(строчный)
-        val apiInterface = ApiInterface.create().getMovies() // Инициализируем Api интерфейс
+        val apiInterface = ApiInterface.create().getUser() // Инициализируем Api интерфейс
 
-        apiInterface.enqueue( object : Callback<user> {
+        apiInterface.enqueue( object : Callback<User> {
 
-            override fun onResponse(call: Call<user>, response: Response<user>) {
-                val data = response.body()
-                Log.d("MyLog", data.toString())
-
-                if(data != null){
+            override fun onResponse(call: Call<User>, response: Response<User>) { // Создаем функцию на поулчение результата API
+                val data = response.body() // Создаем переменную результата
+                if(data != null){ // Проверка на NULL
                     val adapter = CustomRecyclerAdapter(baseContext, data) // Инициализируем адаптер
                     recyclerView.adapter = adapter // Подключаем адаптер
-                    Log.d("MyLog", "а хз в чем тогда дело")
-
-                } else{
-                    Log.d("MyLog", "null")
                 }
             }
-
-            override fun onFailure(call: Call<user>, t: Throwable) {
-                Log.d("MyLog", "ошибка")
+            override fun onFailure(call: Call<User>, t: Throwable) {
             }
         })
-        Log.d("MyLog", apiInterface.toString())
+
 
 
 

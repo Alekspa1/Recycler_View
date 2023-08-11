@@ -9,14 +9,11 @@ import retrofit2.http.GET
 interface ApiInterface {
 
     @GET("api/users?page=2")
-    fun getMovies() : Call<user>
+    fun getUser() : Call<User>
 
     companion object {
-
         var BASE_URL = "https://reqres.in/"
-
         fun create() : ApiInterface {
-
             val retrofit = Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create())
                 .baseUrl(BASE_URL)
@@ -25,4 +22,6 @@ interface ApiInterface {
 
         }
     }
+
+
 }
