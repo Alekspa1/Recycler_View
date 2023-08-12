@@ -1,6 +1,6 @@
 package com.example.recyclerview
 
-data class DataX(
+data class UserInfo(
     val avatar: String,
     val email: String,
     val first_name: String,
