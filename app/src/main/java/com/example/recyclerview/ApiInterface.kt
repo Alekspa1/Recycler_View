@@ -8,8 +8,8 @@ import retrofit2.http.GET
 
 interface ApiInterface {
 
-    @GET("api/users?page=2")
-    fun getMovies() : Call<user>
+    @GET("api/users/2")
+    fun getMovies() : Call<Data>
 
     companion object {
 

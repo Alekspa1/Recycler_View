@@ -12,44 +12,47 @@ import retrofit2.Response
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
+    val Spisok = ArrayList<DataX>()
     override fun onCreate(savedInstanceState: Bundle?) {
         binding = ActivityMainBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         val recyclerView = binding.recyclerView // Инициализируем Recycler View
         recyclerView.layoutManager = GridLayoutManager(this, 2) // Делаем вид(строчный)
+
+
+        for (i in 0..5) {
+            Log.d("MyLog", "Почему 2 рза")
+        }
+
         val apiInterface = ApiInterface.create().getMovies() // Инициализируем Api интерфейс
 
-        apiInterface.enqueue( object : Callback<user> {
+        apiInterface.enqueue(object : Callback<Data> {
 
-            override fun onResponse(call: Call<user>, response: Response<user>) {
-                val data = response.body()
-                Log.d("MyLog", data.toString())
+            override fun onResponse(call: Call<Data>, response: Response<Data>) {
+                val data = response.body()?.data
+                val name = DataX("123", "123", "123", 123, "123")
+                Spisok.add(name)
+                if (data != null) {
+//                    Log.d("MyLog", data.avatar)
+//                    Log.d("MyLog", Spisok[i].avatar)
+                    // Spisok.add(data)
 
-                if(data != null){
-                    val adapter = CustomRecyclerAdapter(baseContext, data) // Инициализируем адаптер
-                    recyclerView.adapter = adapter // Подключаем адаптер
-                    Log.d("MyLog", "а хз в чем тогда дело")
-
-                } else{
+                    // Log.d("MyLog", "а хз в чем тогда дело")
+                } else {
                     Log.d("MyLog", "null")
                 }
             }
-
-            override fun onFailure(call: Call<user>, t: Throwable) {
+            override fun onFailure(call: Call<Data>, t: Throwable) {
                 Log.d("MyLog", "ошибка")
             }
         })
-        Log.d("MyLog", apiInterface.toString())
 
-
-
-
-
+        val adapter = CustomRecyclerAdapter(baseContext, Spisok) // Инициализируем адаптер
+        recyclerView.adapter = adapter // Подключаем адаптер
 
 
     } // Заканчивается onCreate
-
 
 
 } // Заканчивается MainActivity
